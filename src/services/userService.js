@@ -1,13 +1,13 @@
 // User service layer for business logic
 import pool from '../db/index.js';
 
-export const createUser = async (username, email, password) => {
+export const createUser = async (name, bio) => {
   try {
     const [result] = await pool.query(
-      'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-      [username, email, password]
+      'INSERT INTO users (name, bio) VALUES (?, ?)',
+      [name, bio]
     );
-    return { result: { id: result.insertId, username, email } };
+    return { result: { id: result.insertId, name, bio } };
   } catch (err) {
     return { err };
   }
@@ -31,11 +31,11 @@ export const getAllUsers = async () => {
   }
 };
 
-export const updateUser = async (id, username, email, password) => {
+export const updateUser = async (id, name, bio) => {
   try {
     const [result] = await pool.query(
-      'UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?',
-      [username, email, password, id]
+      'UPDATE users SET name = ?, bio = ? WHERE id = ?',
+      [name, bio, id]
     );
     return { result: result.affectedRows };
   } catch (err) {

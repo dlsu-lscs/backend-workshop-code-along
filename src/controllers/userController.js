@@ -2,21 +2,8 @@
 import * as userService from '../services/userService.js';
 
 export const createUser = async (req, res, next) => {
-  const { username, email, password } = req.body;
-  const errors = [];
-  if (!username || typeof username !== 'string' || username.length < 3) {
-    errors.push('Username is required and must be at least 3 characters.');
-  }
-  if (!email || typeof email !== 'string' || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    errors.push('A valid email is required.');
-  }
-  if (!password || typeof password !== 'string' || password.length < 6) {
-    errors.push('Password is required and must be at least 6 characters.');
-  }
-  if (errors.length > 0) {
-    return res.status(400).json({ errors });
-  }
-  const { result } = await userService.createUser(username, email, password);
+  const { name, bio } = req.body;
+  const { result } = await userService.createUser(name, bio);
   res.status(201).json(result);
 };
 
@@ -31,21 +18,8 @@ export const getAllUsers = async (req, res, next) => {
 };
 
 export const updateUser = async (req, res, next) => {
-  const { username, email, password } = req.body;
-  const errors = [];
-  if (!username || typeof username !== 'string' || username.length < 3) {
-    errors.push('Username is required and must be at least 3 characters.');
-  }
-  if (!email || typeof email !== 'string' || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    errors.push('A valid email is required.');
-  }
-  if (!password || typeof password !== 'string' || password.length < 6) {
-    errors.push('Password is required and must be at least 6 characters.');
-  }
-  if (errors.length > 0) {
-    return res.status(400).json({ errors });
-  }
-  await userService.updateUser(req.params.id, username, email, password);
+  const { name, bio } = req.body;
+  await userService.updateUser(req.params.id, name, bio);
   res.json({ message: 'User updated' });
 };
 

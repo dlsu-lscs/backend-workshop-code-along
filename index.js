@@ -10,7 +10,6 @@ app.use(express.json());
 app.use(authenticateApiSecret); // Before all routes
 
 app.use('/api/users', usersRouter);
-app.use('/api/posts', postsRouter);
 // Error handling middleware (should be after all routes)
 app.use(errorHandler);
 
