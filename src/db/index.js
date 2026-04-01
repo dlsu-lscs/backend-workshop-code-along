@@ -3,13 +3,13 @@ import 'dotenv/config';
 // Update these values for your MySQL server
 const pool = mysql.createPool({
   host: 'localhost',
-  user: 'root',
-  password: process.env.MYSQL_ROOT_PASSWORD, // set your MySQL root password
-  database: 'public',
+  user: 'root', // best practice: process.env
+  password: process.env.DB_PASSWORD, // set your MSQyL root password
+  database: 'dummy', //replace with database name | process.env.DB_NAME
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  port: 3306,
+  port: 3306,   // process.env.DEB_PORT || 3306
 });
 
 async function checkDbConnection() {
